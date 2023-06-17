@@ -15,7 +15,7 @@ class Entity extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description'
+        'ulid', 'name', 'description'
     ];
 
     public function team(): BelongsTo

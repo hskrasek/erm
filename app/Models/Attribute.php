@@ -13,6 +13,6 @@ class Attribute extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'ulid', 'name'
     ];
 }
