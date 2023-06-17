@@ -8,16 +8,21 @@ use App\Http\Resources\EntityResource;
 use App\Models\Entity;
 use App\Models\Team;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
+use Vyuldashev\LaravelOpenApi\Attributes as OpenAPI;
 
+#[OpenAPI\PathItem()]
 class CreateEntity extends Controller
 {
     /**
-     * Handle the incoming request.
+     * @param CreateEntityRequest $request
+     * @return JsonResponse
      */
-    public function __invoke(CreateEntityRequest $request)
+    #[OpenAPI\Operation()]
+    public function __invoke(CreateEntityRequest $request): JsonResponse
     {
         /** @var User $user */
         $user = $request->user();

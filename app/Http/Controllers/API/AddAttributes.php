@@ -10,10 +10,18 @@ use App\Models\Entity;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
+use Vyuldashev\LaravelOpenApi\Attributes as OpenAPI;
 
+#[OpenAPI\PathItem()]
 class AddAttributes extends Controller
 {
 
+    /**
+     * @param AddAttributeRequest $request
+     * @param Entity $entity
+     * @return JsonResponse
+     */
+    #[OpenAPI\Operation()]
     public function __invoke(AddAttributeRequest $request, Entity $entity): JsonResponse
     {
         /** @var Attribute $attribute */
