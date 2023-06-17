@@ -2,18 +2,19 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
+use App\Models\Team;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateEntityRequest extends FormRequest
+class AddAttributeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return with($this->user(), fn(User $user) => $user->ownsTeam($user->currentTeam));
+        return true;
+//        return with($this->team(), fn (Team $team) => $this->route('entity')->team() === $team);
     }
 
     /**
@@ -28,10 +29,9 @@ class CreateEntityRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('entities', 'name')
-                    ->where('team_id', $this->user()->currentTeam->id)
-            ],
-            'description' => ['sometimes', 'required', 'string', 'max:255'],
+                Rule::unique('attributes', 'name')
+                    ->where('entity_id', $this->route('entity')->id)
+            ]
         ];
     }
 }
