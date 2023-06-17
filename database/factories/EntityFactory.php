@@ -22,7 +22,7 @@ class EntityFactory extends Factory
             'ulid' => Str::ulid(),
             'team_id' => Team::all()->random(),
             'author_id' => fn (array $attributes) => $attributes['team_id']->users->first(),
-            'name' => Str::ucfirst($this->faker->name),
+            'name' => Str::ucfirst($this->faker->unique()->word),
             'description' => $this->faker->sentence,
         ];
     }
