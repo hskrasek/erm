@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\AddAttributes;
+use App\Http\Controllers\API\CreateEntity;
+use App\Http\Controllers\API\ViewEntity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +19,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/entities/{entity:ulid}', ViewEntity::class)
+        ->name('entities.view');
+
+    Route::post('/entities', CreateEntity::class)
+        ->name('entities.create');
+
+    Route::post('/entities/{entity:ulid}/attributes', AddAttributes::class)
+        ->name('entities.attributes.create');
 });
