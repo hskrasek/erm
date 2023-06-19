@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Entity extends Model
 {
+    use Concerns\HasPublicIdentifier;
     use HasFactory;
 
     protected $fillable = [
@@ -31,5 +33,10 @@ class Entity extends Model
     public function attributes(): HasMany
     {
         return $this->hasMany(Attribute::class);
+    }
+
+    public function instances(): HasMany
+    {
+        return $this->hasMany(Instance::class);
     }
 }

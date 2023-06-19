@@ -19,7 +19,6 @@ class EntityFactory extends Factory
     public function definition(): array
     {
         return [
-            'ulid' => Str::ulid(),
             'team_id' => Team::all()->random(),
             'author_id' => fn (array $attributes) => $attributes['team_id']->users->first(),
             'name' => Str::ucfirst($this->faker->unique()->word),

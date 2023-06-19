@@ -27,7 +27,6 @@ class AddAttributes extends Controller
         /** @var Attribute $attribute */
         $attribute = $entity->attributes()
             ->create([
-                'ulid' => Str::ulid(now()),
                 'name' => $request->input('name'),
             ]);
 
