@@ -28,7 +28,6 @@ class CreateEntity extends Controller
         /** @var Entity $entity */
         $entity = $team->entities()->make(
             [
-                'ulid' => Str::ulid(now()),
                 'name' => $request->input('name'),
                 'description' => $request->input('description', ''),
             ]

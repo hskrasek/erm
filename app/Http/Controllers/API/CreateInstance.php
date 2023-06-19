@@ -26,7 +26,6 @@ class CreateInstance extends Controller
         $instance = $entity->instances()
             ->make(
                 [
-                    'ulid' => Str::ulid(now()),
                     'attributes' => new \ArrayObject($attributes->mapWithKeys(fn (array $attribute) => [$attribute['attribute']->name => $attribute['value']])
                         ->all()),
                 ]

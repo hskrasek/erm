@@ -20,6 +20,7 @@ class InstanceResource extends JsonResource
     {
         return [
             'id' => $this->ulid,
+            'type' => $this->entity->name,
             'data' => $this->attributes,
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
