@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,12 +17,15 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
+    use Concerns\HasPublicIdentifier;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
+    public const PUBLIC_IDENTIFIER_PREFIX = 'usr';
 
     /**
      * The attributes that are mass assignable.
