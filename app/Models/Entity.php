@@ -32,4 +32,9 @@ class Entity extends Model
     {
         return $this->hasMany(Attribute::class);
     }
+
+    public function instances(): HasMany
+    {
+        return $this->hasMany(Instance::class);
+    }
 }
