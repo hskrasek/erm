@@ -18,7 +18,6 @@ class AttributeFactory extends Factory
     public function definition(): array
     {
         return [
-            'ulid' => Str::ulid(),
             'name' => Str::ucfirst($this->faker->name),
             'description' => $this->faker->sentence,
         ];
