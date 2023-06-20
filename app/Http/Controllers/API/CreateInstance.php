@@ -7,13 +7,25 @@ use App\Http\Requests\CreateInstanceRequest;
 use App\Http\Resources\InstanceResource;
 use App\Models\Attribute;
 use App\Models\Instance;
+use App\OpenApi\RequestBodies\CreateInstanceRequestBody;
+use App\OpenApi\Responses\ErrorValidationResponse;
+use App\OpenApi\Responses\InstanceResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+use Vyuldashev\LaravelOpenApi\Attributes as OpenAPI;
 
+#[OpenAPI\PathItem]
 class CreateInstance extends Controller
 {
+    /**
+     * @param CreateInstanceRequest $request
+     * @return JsonResponse
+     */
+    #[OpenAPI\Operation()]
+    #[OpenAPI\RequestBody(factory: CreateInstanceRequestBody::class)]
+    #[OpenAPI\Response(factory: InstanceResponse::class, statusCode: 201)]
+    #[OpenAPI\Response(factory: ErrorValidationResponse::class, statusCode: 422)]
     public function __invoke(CreateInstanceRequest $request): JsonResponse
     {
         $entity = $request->entity();
