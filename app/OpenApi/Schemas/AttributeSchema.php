@@ -21,6 +21,7 @@ class AttributeSchema extends SchemaFactory implements Reusable
         return Schema::object('Attribute')
             ->properties(
                 Schema::string('id')->default(null),
+                Schema::string('slug')->default(null),
                 Schema::string('name')->default(null),
                 Schema::string('created_at')->format(Schema::FORMAT_DATE_TIME)->default(null),
                 Schema::string('updated_at')->format(Schema::FORMAT_DATE_TIME)->default(null),
