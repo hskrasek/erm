@@ -12,9 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 class Attribute extends Model
 {
     use Concerns\HasPublicIdentifier;
+    use Concerns\HasSlug;
     use HasFactory;
 
     protected $fillable = [
-        'ulid', 'name'
+        'ulid', 'name', 'slug'
     ];
 }

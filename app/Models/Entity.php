@@ -14,10 +14,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Entity extends Model
 {
     use Concerns\HasPublicIdentifier;
+    use Concerns\HasSlug;
     use HasFactory;
 
     protected $fillable = [
-        'ulid', 'name', 'description'
+        'ulid', 'name', 'description', 'slug'
     ];
 
     public function team(): BelongsTo

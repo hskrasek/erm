@@ -21,6 +21,7 @@ class AttributeResource extends JsonResource
         return [
             'id' => $this->ulid,
             'name' => $this->name,
+            'slug' => $this->slug,
             'created_at' => $this->created_at->toDateTimeString(),
         ];
     }

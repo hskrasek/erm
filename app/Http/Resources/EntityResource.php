@@ -23,6 +23,7 @@ class EntityResource extends JsonResource
         return [
             'id' => $this->ulid,
             'name' => $this->name,
+            'slug' => $this->slug,
             'description' => $this->description,
             'attributes' => AttributeResource::collection($this->whenLoaded('attributes')),
             'author' => UserResource::make($this->whenLoaded('author')),
