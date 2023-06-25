@@ -8,9 +8,6 @@ use Hidehalo\Nanoid\Client;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-/**
- * @mixin Model
- */
 trait HasPublicIdentifier
 {
     public static function bootHasPublicIdentifier(): void
@@ -22,7 +19,9 @@ trait HasPublicIdentifier
 
             static $nano = new Client(size: 22);
 
-            $model->ulid = self::identifierPrefix() . '_' . $nano->generateId(mode: Client::MODE_DYNAMIC);
+            $model->ulid = self::identifierPrefix() . '_' . $nano->formattedId(
+                alphabet: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                );
         });
     }
 
