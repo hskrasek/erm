@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AddAttributes;
 use App\Http\Controllers\API\CreateEntity;
 use App\Http\Controllers\API\CreateInstance;
+use App\Http\Controllers\API\CreateRelationship;
 use App\Http\Controllers\API\ViewEntity;
 use App\Http\Controllers\API\ViewInstance;
 use Illuminate\Http\Request;
@@ -38,4 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/instances', CreateInstance::class)
         ->name('instances.create');
+
+    Route::post('/relationships', CreateRelationship::class)
+        ->name('relationships.create');
 });
