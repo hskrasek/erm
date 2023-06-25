@@ -2,18 +2,19 @@
 
 namespace App\Http\Requests;
 
+use App\Enum\Cardinality;
 use App\Models\Entity;
-use App\Models\Instance;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateInstanceRequest extends FormRequest
+class CreateRelationshipRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
+        // TODO, correctly authorize this
         return true;
     }
 
@@ -25,47 +26,44 @@ class CreateInstanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'parent_instance_id' => [
-                'bail',
-                'sometimes',
-                'required',
-                'string',
-                Rule::exists('instances', 'ulid')
-                    ->where('team_id', $this->team())
-            ],
-            'entity_id' => [
+            'name' => [
                 'bail',
                 'required',
                 'string',
-                Rule::exists('entities', 'ulid')
-                    ->where('team_id', $this->team())
+                'max:255',
             ],
-            'attributes' => [
-                'bail',
-                'required',
-                'array',
-            ],
-            'attributes.*.attribute_id' => [
+            'parent_entity_id' => [
                 'bail',
                 'required',
                 'string',
-                Rule::exists('attributes', 'ulid')
+                Rule::exists('entities', 'ulid'),
             ],
-            'attributes.*.value' => [
+            'child_entity_id' => [
                 'bail',
                 'required',
-                //TODO: Support custom validation
+                'string',
+                Rule::exists('entities', 'ulid'),
+            ],
+            'minimum' => [
+                'bail',
+                'required',
+                Rule::enum(Cardinality::class),
+            ],
+            'maximum' => [
+                'bail',
+                'required',
+                Rule::enum(Cardinality::class),
             ]
         ];
     }
 
-    public function entity(): Entity
+    public function parentEntity(): Entity
     {
-        return Entity::whereUlid($this->input('entity_id'))->first();
+        return Entity::whereUlid($this->input('parent_entity_id'))->first();
     }
 
-    public function parentInstance(): ?Instance
+    public function childEntity(): Entity
     {
-        return Instance::whereUlid($this->input('parent_instance_id'))->first();
+        return Entity::whereUlid($this->input('child_entity_id'))->first();
     }
 }

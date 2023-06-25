@@ -27,6 +27,7 @@ class EntityResource extends JsonResource
             'description' => $this->description,
             'attributes' => AttributeResource::collection($this->whenLoaded('attributes')),
             'author' => UserResource::make($this->whenLoaded('author')),
+            'relationships' => RelationshipResource::make($this->whenLoaded('relationships')),
         ];
     }
 }

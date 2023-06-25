@@ -21,6 +21,6 @@ class ViewInstance extends Controller
     #[OpenAPI\Response(factory: InstanceResponse::class, statusCode: 200)]
     public function __invoke(Request $request, Instance $instance): InstanceResource
     {
-        return new InstanceResource($instance);
+        return new InstanceResource($instance->load('parent'));
     }
 }

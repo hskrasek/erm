@@ -40,4 +40,9 @@ class Entity extends Model
     {
         return $this->hasMany(Instance::class);
     }
+
+    public function relationships(): HasMany
+    {
+        return $this->hasMany(Relationship::class, 'parent_entity_id');
+    }
 }

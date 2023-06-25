@@ -23,6 +23,6 @@ class ViewEntity extends Controller
     #[OpenAPI\Response(factory: EntityResponse::class, statusCode: 200)]
     public function __invoke(Request $request, Entity $entity): EntityResource
     {
-        return new EntityResource($entity->load('attributes', 'author'));
+        return new EntityResource($entity->load('attributes', 'author', 'relationships'));
     }
 }

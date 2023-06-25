@@ -7,6 +7,7 @@ use App\Http\Requests\CreateInstanceRequest;
 use App\Http\Resources\InstanceResource;
 use App\Models\Attribute;
 use App\Models\Instance;
+use App\Models\Relationship;
 use App\OpenApi\RequestBodies\CreateInstanceRequestBody;
 use App\OpenApi\Responses\ErrorValidationResponse;
 use App\OpenApi\Responses\InstanceResponse;
@@ -44,6 +45,12 @@ class CreateInstance extends Controller
             );
 
         $instance->team()->associate($request->team())->save();
+
+        if ($request->parentInstance() !== null) {
+            $request->parentInstance()
+                ->children()
+                ->attach($instance, ['relationship_id' => Relationship::first()->id]);
+        }
 
         return (new InstanceResource($instance))
             ->toResponse($request)
