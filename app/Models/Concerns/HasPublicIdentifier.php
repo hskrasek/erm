@@ -22,13 +22,13 @@ trait HasPublicIdentifier
 
             static $nano = new Client(size: 22);
 
-            $model->ulid = $this->identifierPrefix() . '_' . $nano->generateId(mode: Client::MODE_DYNAMIC);
+            $model->ulid = self::identifierPrefix() . '_' . $nano->generateId(mode: Client::MODE_DYNAMIC);
         });
     }
 
-    private function identifierPrefix(): string
+    private static function identifierPrefix(): string
     {
-        if (defined(static::PUBLIC_IDENTIFIER_PREFIX)) {
+        if (defined('static::PUBLIC_IDENTIFIER_PREFIX')) {
             return static::PUBLIC_IDENTIFIER_PREFIX;
         }
 

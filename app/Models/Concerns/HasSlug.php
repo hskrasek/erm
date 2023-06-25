@@ -27,8 +27,8 @@ trait HasSlug
     public function slug(): Attribute
     {
         return Attribute::make(
-            get: function (string $slug, array $attributes): string {
-                if ($slug !== '') {
+            get: function (?string $slug, array $attributes): string {
+                if ($slug !== null) {
                     return $slug;
                 }
 
